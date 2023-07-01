@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurant Recommendation System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        select, button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .recommendations {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            color: #555;
+        }
+        /* Add some additional styles */
+        .image-preview {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .food-image {
+            max-width: 300px;
+            max-height: 200px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .city-info {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+     <script>
+        // Function to show food image based on the selected cuisine
+        function showFoodImage() {
+            var cuisineSelect = document.getElementById('cuisine');
+            var foodImage = document.getElementById('food-image');
+            var cuisine = cuisineSelect.value.toLowerCase();
+
+            // Set the image source based on the selected cuisine
+            if (cuisine === 'burger') {
+                foodImage.src = 'https://rb.gy/mjgfx';
+            } else if (cuisine === 'arabian') {
+                foodImage.src = 'https://rb.gy/clzlt';
+            } else {
+                // Set a placeholder image URL as the default image source
+                foodImage.src = 'https://tinyurl.com/2aur8zc7';
+            }
+        }
+    </script>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Restaurant Recommendation System</h1>
+        
+        <div class="image-preview">
+            <img id="food-image" class="food-image" src="https://tinyurl.com/2aur8zc7" alt="Food Image">
+        </div>
+        
+        <form action="/recommend" method="post">
+            <label for="cuisine">Select Cuisine:</label>
+              
+              </select>
+
+            <label for="location">Select Location:</label>
+            <select id="location" name="location">
+
+            </select>
+           
+            <button type="submit">Recommend</button>
+        </form>
+        {% if recommendations %}
+        <div class="recommendations">
+            <h2>Recommended Restaurants:</h2>
+            <ul>
+                {% for recommendation in recommendations %}
+                <li>{{ recommendation }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
